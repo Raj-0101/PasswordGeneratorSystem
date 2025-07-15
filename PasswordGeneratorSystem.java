@@ -15,8 +15,8 @@ public class PasswordGeneratorSystem {
 
     static String allChars = upper + lower + numbers + symbols;
 
-    // Use a fixed secret key (16 characters = 128 bit key)
-    static String secretKey = "1234567890abcdef"; // Simple example key
+
+    static String secretKey = "1234567890abcdef"; 
 
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
@@ -32,16 +32,13 @@ public class PasswordGeneratorSystem {
 
         displayUsefulInfo();
 
-        // Encrypt password
         String encrypted = encrypt(password, secretKey);
         System.out.println("Encrypted Password: " + encrypted);
 
-        // Save encrypted password to file
         saveToFile("passwords.txt", encrypted);
         System.out.println("Encrypted password saved to passwords.txt");
     }
 
-    // 1. Generate Password
     public static String generatePassword(int length) {
         StringBuilder password = new StringBuilder();
         Random rand = new Random();
@@ -53,7 +50,6 @@ public class PasswordGeneratorSystem {
         return password.toString();
     }
 
-    // 2. Check Password Strength
     public static String checkPasswordStrength(String password) {
         boolean hasUpper = false, hasLower = false, hasDigit = false, hasSymbol = false;
 
@@ -75,7 +71,6 @@ public class PasswordGeneratorSystem {
         else return "Medium";
     }
 
-    // 3. Display Info
     public static void displayUsefulInfo() {
         System.out.println("\nTips:");
         System.out.println("- Use 8+ characters");
@@ -84,7 +79,6 @@ public class PasswordGeneratorSystem {
         System.out.println("- Never share passwords with others");
     }
 
-    // 4. Encrypt using AES
     public static String encrypt(String password, String key) throws Exception {
         SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), "AES");
 
@@ -95,7 +89,6 @@ public class PasswordGeneratorSystem {
         return Base64.getEncoder().encodeToString(encryptedBytes);
     }
 
-    // 5. Save to File
     public static void saveToFile(String filename, String data) {
         try (FileWriter writer = new FileWriter(filename, true)) {
             writer.write(data + "\n");
